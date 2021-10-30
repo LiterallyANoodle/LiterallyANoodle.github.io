@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="urf-8">
+	<title> epic2 </title>
+	<font>
+		<style type="text/css">
+			p {
+				text-align: center !important;
+				margin: 8% auto !important;
+			}
+
+			html * {
+				background-color: black;
+				font-size: 15px !important;
+				line-height: 1.625 !important;
+				color: #FFFFFF !important;
+				font-family: Georgia, sans-serif;
+			}
+
+			.horizontal-center {
+				margin: 0;
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		</style>
+	</font>
+</head>
+<body>
+	<div class="horizontal-center">
+		<button id="howButton" onclick="hideAndPlay()" />how did I get here</button>
+	</div>
+	<p>how did I get here</p>
+	<center>
+		<video width="854" height="480" autoplay preload loop id="myVideo" />
+			<source src="Once in a Lifetime.mp4" type="video/mp4" />
+		</video>
+	</center>
+	<script type="text/javascript">
+		var vid = document.getElementById("myVideo");
+		var howButton = document.getElementById("howButton");
+
+		// function that is called on button press
+		function hideAndPlay() {
+
+			// hide the button 
+			howButton.style.display = "none";
+
+			// play the video, now that the user has interacted 
+			vid.currentTime = 1;
+			vid.play();
+		}
+	</script>
+</body>
+</html>
