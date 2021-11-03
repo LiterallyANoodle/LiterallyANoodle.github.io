@@ -15,12 +15,42 @@
 				color: #FFFFFF !important;
 				font-family: Georgia;
 			}
+
+			.center {
+				margin: 0;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+
+			.frontButton {
+				padding: 15px 25px;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: #000000;
+				border: 3px solid #FFFFFF;
+				background-color: black;
+				border-radius: 10px;
+				transition-duration: 0.4s;
+			}
+			.frontButton:hover {
+				background-color: #073871;
+			}
 		</style>
 	</font>
 </head>
 <body>
 	<style>
-		body { padding: 0; margin: 0; } 
+		body { padding: 0; margin: 0; background-color: black;} 
 		html { overflow-y: hidden; }
 	</style>
+	
+	<main>
+		<div class="center">
+			<button class="frontButton">Clicky clicky.</button>
+		</div>
+	</main>
 </body>
