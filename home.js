@@ -31,8 +31,38 @@ class DefaultButton extends Clickable {
 }
 
 
-// background color for front page
-let bg;
+// declare variables
+var bg;
+var frontButton = document.getElementById("frontButton");
+
+
+function frontListener(event) {
+	if (event.type == "animationstart") {
+		console.log("animationstart");
+	}
+	if (event.type == "animationend") {
+		console.log("animationend");
+	}
+}
+
+function frontOnPressHandler() {
+
+	frontButton = document.getElementById("frontButton");
+	frontButton.addEventListener("animationstart", frontListener, false);
+	frontButton.addEventListener("animationend", frontListener, false);
+
+	// console.log(frontButton.value);
+
+	// remove the text over time
+	// while (frontButton.text != "") {
+	// 	console.log("while loop");
+	// 	setTimeout(200);
+	// 	frontButton.text = frontButton.text.slice(0, -1);
+	// }
+
+	// begin the button shape animation 
+	frontButton.className = "frontButtonPress";
+}
 
 function setup() {
 
