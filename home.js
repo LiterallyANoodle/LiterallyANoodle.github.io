@@ -15,7 +15,7 @@ class DefaultButton extends Clickable {
 		this.width = 125;
 		this.height = 65;
 		this.stroke = white;
-		this.color = black;
+		this.color = color(0, 0, 0, 0);
 		this.textColor = white;
 		this.textFont = "Georgia";
 		this.textSize = 15;
