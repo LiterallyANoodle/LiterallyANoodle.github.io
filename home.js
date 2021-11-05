@@ -45,33 +45,21 @@ function pressListener(event) {
 	if (event.type == "animationend") {
 		console.log("animationend");
 		// frontButton.className = "frontButtonRelease";
-		if (frontReleased) {
-			frontButton.className = "frontButtonRelease";
-		}
 		frontPressed = true;
+		releaseAnimator();
 		console.log("frontReleased from pressListener: " + frontReleased);
 	}
 }
 
-function releaseListener(event) {
-	if (event.type == "animationstart") {
-		console.log("animationstart");
-	}
-	if (event.type == "animationend") {
-		console.log("animationend");
+function releaseAnimator() {
+	if (frontPressed && frontReleased) {
+		frontButton.className = "frontButtonRelease";
 	}
 }
 
 function frontOnReleaseHandler() {
-
-	frontButton.addEventListener("animationstart", releaseListener, false);
-	frontButton.addEventListener("animationend", releaseListener, false);
-
 	frontReleased = true; 
-
-	if (frontPressed) {
-		frontButton.className = "frontButtonRelease";
-	}
+	releaseAnimator();
 }
 
 function frontOnPressHandler() {
@@ -79,15 +67,6 @@ function frontOnPressHandler() {
 	frontButton = document.getElementById("frontButton");
 	frontButton.addEventListener("animationstart", pressListener, false);
 	frontButton.addEventListener("animationend", pressListener, false);
-
-	// console.log(frontButton.value);
-
-	// remove the text over time
-	// while (frontButton.text != "") {
-	// 	console.log("while loop");
-	// 	setTimeout(200);
-	// 	frontButton.text = frontButton.text.slice(0, -1);
-	// }
 
 	// begin the button shape animation 
 	frontButton.className = "frontButtonPress";

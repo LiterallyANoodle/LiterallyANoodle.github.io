@@ -48,6 +48,7 @@
 			.frontButtonRelease {
 				animation-duration: 0.5s;
 				animation-name: frontButtonRelease;
+				animation-fill-mode: forwards;
 
 				padding: 105vw 205vh;
 				font-size: 15px;
@@ -61,8 +62,9 @@
 			}
 
 			@keyframes frontButtonRelease {
-				from {padding: 10px 20px;}
-				to {padding: 105vw 205vh;}
+				0% {padding: 10px 20px;}
+				99% {padding: 105vw 205vh; visibility: visible;}
+				100% {padding: 105vw 205vh; visibility: hidden;}
 			}
 
 			.frontButton {
