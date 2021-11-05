@@ -1,90 +1,118 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<title> THe pizza is aggressive </title>
-</head>
+	<meta charset="urf-8">
+	<title>Epic Mode</title>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+	<script src="https://unpkg.com/p5.createloop@0.2.8/dist/p5.createloop.js"></script>
+	<script src="lib/p5.clickable-1.2/p5.clickable.js"></script>
+	<script src="home.js"></script>
+	<font>
+		<style type="text/css">
+			html * {
+				font-size: 15px !important;
+				line-height: 1.625 !important;
+				color: #FFFFFF;
+				font-family: Georgia;
+			}
 
-<audio id="song1">
-		<source src="TheFireIsGoneGuitarCover.mp3" type="audio/mpeg">
-</audio>
+			.center {
+				margin: 0;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-ms-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
 
-<audio id="song2">
-		<source src="UnstoppableForceGuitarCover.mp3" type="audio/mpeg">
-</audio>
+			.frontButtonPress {
+				animation-duration: 0.25s;
+				animation-name: frontButtonPress;
 
-<script>
+				padding: 10px 20px;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: #073871;
+				border: 3px solid #FFFFFF;
+				background-color: #073871;
+				border-radius: 10px;
+				transition-duration: 0.4s;
+			}
 
-	var x = document.getElementById("song1");	
-	var state = "powderblue";
+			@keyframes frontButtonPress {
+				from {padding: 15px 25px;}
+				to {padding: 10px 20px;}
+			}
 
-	function bg() {
-		
-		console.log(document.getElementById('background').style.backgroundColor);
-		if (state == "powderblue") {
-			state = "purple";
-		} else {
-			state = "powderblue";
-		}
-		document.getElementById('background').style.backgroundColor = state;
-	}
+			.frontButtonRelease {
+				animation-duration: 0.5s;
+				animation-name: frontButtonRelease;
+				animation-fill-mode: forwards;
 
-	function playSong() {
-		
-		x.pause();
+				padding: 105vw 205vh;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: #073871;
+				border: 3px solid #FFFFFF;
+				background-color: #073871;
+				border-radius: 10px;
+				transition-duration: 0.4s;
+			}
 
-		if (state == "powderblue") {
-			x = document.getElementById("song1");
-		} else {
-			x = document.getElementById("song2");
-		}
-		x.play();
-	}
+			@keyframes frontButtonRelease {
+				0% {padding: 10px 20px;}
+				99% {padding: 105vw 205vh; visibility: visible;}
+				100% {padding: 105vw 205vh; visibility: hidden;}
+			}
 
-	function picture() {
-		var pic = "butterdog.gif";
-		var vid = document.getElementById('alsodog');
-		document.getElementById('butterdog').src = pic;
-		vid.play();
-    }
-
+			.frontButton {
+				padding: 15px 25px;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: white;
+				border: 3px solid #FFFFFF;
+				background-color: black;
+				border-radius: 10px;
+				transition-duration: 0.4s;
+			}
+			.frontButton:hover {
+				transition-duration: 0.4s;
+				background-color: #073871;
+			}
+			/*.frontButtonHeld {
+				padding: 15px 25px;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: #073871;
+				border: 3px solid #FFFFFF;
+				background-color: black;
+				border-radius: 10px;
+				transition-duration: 0.4s;
+			}
+			.frontButtonHeld:hover {
+				transition-duration: 0.4s;
+				background-color: #073871;
+			}*/
+			/*.frontButton:active {
+				color: #073871;
+			}*/
 			
-</script>
-
-<body id="background" style="background-color:powderblue">
+		</style>
+	</font>
+</head>
+<body>
+	<style>
+		body { padding: 0; margin: 0; background-color: black;} 
+		html { overflow-y: hidden; overflow-x: hidden;}
+	</style>
 	
-
-	<h1>What's 9 + 10?</h1>
-	<h2>No, I am not.</h2>
-	<p> 21 </p>
-	<p style="font-family:georgia" style="color:green">Georgia is the better times new roman<sup>You didn't have to <sup>cUt me <i>off</i><sub>*trap drums and bass remix*</sub></sup></sup></p>
-	<p title="Say it ain't so..." style="background-color:tomato">YOu stupid</p>
-	<a href="http://www.mmahan.net/matt/" style="color:purple"> Get wifi anywhere you go *HOLDUP* </a>
-	<br>
-	<br>
-	<a type="button" onclick="bg()">
-
-		<img src="trollge.gif" width="500" height="300">
-	
-
-	</a>
-	<br>
-	<br>
-	<br>
-	<button id="songButton" onclick="playSong()" style="color:blue">
-		Woah, chill out.
-	</button>
-
-	<br>
-	<br>
-
-	<img src="cube.png" width="2000" height="400">
-
-	<p>butter dog dog with the <button onclick="picture()">butter on em</button></p>
-
-	<img id="butterdog" src="butterdog" alt="click button">
-	<audio id="alsodog">
-		<source src="https://r4---sn-q4flrnek.googlevideo.com/videoplayback?expire=1613304335&ei=r70oYJCTMpDt2_gPj5mz8Ao&ip=2600%3A1700%3Aa60%3A880%3A31a2%3A26b8%3A5560%3Ab326&id=o-ABs1G5bLT0IXg2pnXnYgIn26Zb0QDhy8P08a-9xitJM6&itag=18&source=youtube&requiressl=yes&mh=xX&mm=31%2C29&mn=sn-q4flrnek%2Csn-q4fl6nsk&ms=au%2Crdu&mv=m&mvi=4&pl=43&initcwndbps=1440000&vprv=1&mime=video%2Fmp4&ns=TU2-OscU4fEtoe0v4Mo4ao8F&gir=yes&clen=1847334859&ratebypass=yes&dur=36000.055&lmt=1604203809592267&mt=1613282445&fvip=4&fexp=23983797&c=WEB&txp=5430434&n=I78d01r2U3Usl0IMYs&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRQIhAJNqF9oi6eROkkVu8iGp1Abhj3GIhUMZc-HhoD9xMm0kAiBgaX7or4UxRhfPIlyflS6c5R9_eu-tALOruz7lcO7WGw%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRgIhANfXUq30KPtKeQLIish_0U_0U6OWy7vgs27eGjIWstbdAiEA0RdT8qdvs8gHOzJOFK8jzGiKw1VLbDvgVr2Nzz4iQwE%3D" type="video/mp4"
-	</audio>
-	
+	<main>
+		<div class="center">
+			<button id="frontButton" class="frontButton" onmousedown="frontOnPressHandler()" onmouseup="frontOnReleaseHandler()">Clicky clicky.</button>
+		</div>
+	</main>
 </body>
-</html>
