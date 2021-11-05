@@ -35,24 +35,48 @@ class DefaultButton extends Clickable {
 var bg;
 var frontButton = document.getElementById("frontButton");
 var frontPressed = false;
+var frontReleased = false;
 
 
-function frontListener(event) {
+function pressListener(event) {
 	if (event.type == "animationstart") {
 		console.log("animationstart");
 	}
 	if (event.type == "animationend") {
 		console.log("animationend");
-		frontButton.className = "frontButtonRelease";
-		// frontPressed = true;
+		// frontButton.className = "frontButtonRelease";
+		if (frontReleased) {
+			frontButton.className = "frontButtonRelease";
+		}
+		frontPressed = true;
+		console.log("frontReleased from pressListener: " + frontReleased);
 	}
+}
+
+function releaseListener(event) {
+	if (event.type == "animationstart") {
+		console.log("animationstart");
+	}
+	if (event.type == "animationend") {
+		console.log("animationend");
+		if (frontPressed) {
+			frontButton.className = "frontButtonRelease";
+		}
+		frontReleased = true;
+		console.log("frontPressed from releaseListener: " + frontPressed);
+	}
+}
+
+function frontOnReleaseHandler() {
+	frontButton.addEventListener("animationstart", releaseListener, false);
+	frontButton.addEventListener("animationend", releaseListener, false);
 }
 
 function frontOnPressHandler() {
 
 	frontButton = document.getElementById("frontButton");
-	frontButton.addEventListener("animationstart", frontListener, false);
-	frontButton.addEventListener("animationend", frontListener, false);
+	frontButton.addEventListener("animationstart", pressListener, false);
+	frontButton.addEventListener("animationend", pressListener, false);
 
 	// console.log(frontButton.value);
 
