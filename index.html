@@ -28,11 +28,41 @@
 			.frontButtonPress {
 				animation-duration: 0.25s;
 				animation-name: frontButtonPress;
+
+				padding: 10px 20px;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: #073871;
+				border: 3px solid #FFFFFF;
+				background-color: #073871;
+				border-radius: 10px;
+				transition-duration: 0.4s;
 			}
 
 			@keyframes frontButtonPress {
 				from {padding: 15px 25px;}
 				to {padding: 10px 20px;}
+			}
+
+			.frontButtonRelease {
+				animation-duration: 0.5s;
+				animation-name: frontButtonRelease;
+
+				padding: 105vw 205vh;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
+				color: #073871;
+				border: 3px solid #FFFFFF;
+				background-color: #073871;
+				border-radius: 10px;
+				transition-duration: 0.4s;
+			}
+
+			@keyframes frontButtonRelease {
+				from {padding: 10px 20px;}
+				to {padding: 105vw 205vh;}
 			}
 
 			.frontButton {
@@ -50,9 +80,24 @@
 				transition-duration: 0.4s;
 				background-color: #073871;
 			}
-			.frontButton:active {
+			/*.frontButtonHeld {
+				padding: 15px 25px;
+				font-size: 15px;
+				text-align: center;
+				cursor: pointer;
 				color: #073871;
+				border: 3px solid #FFFFFF;
+				background-color: black;
+				border-radius: 10px;
+				transition-duration: 0.4s;
 			}
+			.frontButtonHeld:hover {
+				transition-duration: 0.4s;
+				background-color: #073871;
+			}*/
+			/*.frontButton:active {
+				color: #073871;
+			}*/
 			
 		</style>
 	</font>
@@ -60,7 +105,7 @@
 <body>
 	<style>
 		body { padding: 0; margin: 0; background-color: black;} 
-		html { overflow-y: hidden; }
+		html { overflow-y: hidden; overflow-x: hidden;}
 	</style>
 	
 	<main>

@@ -34,6 +34,7 @@ class DefaultButton extends Clickable {
 // declare variables
 var bg;
 var frontButton = document.getElementById("frontButton");
+var frontPressed = false;
 
 
 function frontListener(event) {
@@ -42,6 +43,8 @@ function frontListener(event) {
 	}
 	if (event.type == "animationend") {
 		console.log("animationend");
+		frontButton.className = "frontButtonRelease";
+		// frontPressed = true;
 	}
 }
 
@@ -83,6 +86,8 @@ function draw() {
 
 	// set the background color 
 	background(bg);
+	fill(255);
+	// rect(400, windowHeight / 2, 10, 20);
 
 
 }
