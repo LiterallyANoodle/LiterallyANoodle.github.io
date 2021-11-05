@@ -54,7 +54,7 @@ function pressListener(event) {
 function releaseAnimator() {
 	if (frontPressed && frontReleased) {
 		frontButton.className = "frontButtonRelease";
-		bg = color(75, 0, 130);
+		bg = color(75, 0, 130, 0);
 	}
 }
 
@@ -78,12 +78,14 @@ function setup() {
 	// create canvas as the size of the window.
 	// render it as a black plane
 	createCanvas(windowWidth, windowHeight);
-	background(0);
 	frameRate(30);
 
 	// colors
 	frontRGB = color(0, 0, 0);
-	bg = color(0, 0, 0);
+	bg = color(0, 0, 0, 0);
+
+	// set background
+	background(bg);
 
 }
 
