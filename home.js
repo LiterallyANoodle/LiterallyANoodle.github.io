@@ -59,17 +59,19 @@ function releaseListener(event) {
 	}
 	if (event.type == "animationend") {
 		console.log("animationend");
-		if (frontPressed) {
-			frontButton.className = "frontButtonRelease";
-		}
-		frontReleased = true;
-		console.log("frontPressed from releaseListener: " + frontPressed);
 	}
 }
 
 function frontOnReleaseHandler() {
+
 	frontButton.addEventListener("animationstart", releaseListener, false);
 	frontButton.addEventListener("animationend", releaseListener, false);
+
+	frontReleased = true; 
+
+	if (frontPressed) {
+		frontButton.className = "frontButtonRelease";
+	}
 }
 
 function frontOnPressHandler() {
