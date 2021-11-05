@@ -54,6 +54,7 @@ function pressListener(event) {
 function releaseAnimator() {
 	if (frontPressed && frontReleased) {
 		frontButton.className = "frontButtonRelease";
+		bg = color(75, 0, 130);
 	}
 }
 
