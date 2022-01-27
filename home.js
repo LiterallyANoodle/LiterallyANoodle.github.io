@@ -1,42 +1,4 @@
-// var frontButton = document.getElementById("frontButton");
-// var frontPressed = false;
-// var frontReleased = false;
 
-
-// function pressListener(event) {
-// 	if (event.type == "animationstart") {
-// 		console.log("animationstart");
-// 	}
-// 	if (event.type == "animationend") {
-// 		console.log("animationend");
-// 		// frontButton.className = "frontButtonRelease";
-// 		frontPressed = true;
-// 		releaseAnimator();
-// 		console.log("frontReleased from pressListener: " + frontReleased);
-// 	}
-// }
-
-// function releaseAnimator() {
-// 	if (frontPressed && frontReleased) {
-// 		frontButton.className = "frontButtonRelease";
-// 		bg = color(75, 0, 130, 0);
-// 	}
-// }
-
-// function frontOnReleaseHandler() {
-// 	frontReleased = true; 
-// 	releaseAnimator();
-// }
-
-// function frontOnPressHandler() {
-
-// 	frontButton = document.getElementById("frontButton");
-// 	frontButton.addEventListener("animationstart", pressListener, false);
-// 	frontButton.addEventListener("animationend", pressListener, false);
-
-// 	// begin the button shape animation 
-// 	frontButton.className = "frontButtonPress";
-// }
 
 // define a simple vector (just a tuple, for our case)
 class Vector2 {
@@ -83,6 +45,21 @@ class Vector2 {
 		let resultY = this.y + other.y;
 
 		return new Vector2(resultX, resultY); 
+	}
+
+	// distance 
+	distance(other) {
+		let x = other.x - this.x;
+		let y = other.y - this.y; 
+
+		let d = Math.sqrt((x ** 2) + (y ** 2));
+
+		return d;
+	}
+
+	// angle
+	angle() {
+		return Math.atan(this.y/this.x);
 	}
 
 	// magnitude
@@ -283,9 +260,188 @@ class SeaweedNode extends PhysObject {
 	// 5. forces
 	// unique values 
 	// 1. width
-	// 2. stalk color  
+	// 2. stalk color 
+	// 3. child 
+
+	// methods
+	// 1. tension 
+	// This method calculates the tension to apply to a child node that's a little too far away
 
 	// constructor
+	constructor(child=null, x=0, y=0, m=1, w=50, h=130, c=color(0,200,0,50), vx=0, vy=0, fix=false, forces=[]) {
+
+		super(x, y, m, vx, vy, fix, forces);
+
+		this.width = w;
+		this.color = c;
+		this.child = child;
+		this.height = h; 
+
+	}
+
+	// getters and setters 
+	get width() {
+		return this.width_;
+	}
+
+	set width(value) {
+		this.width_ = value;
+	}
+
+	get color() {
+		return this.color_;
+	}
+
+	set color(value) {
+		this.color_ = value;
+	}
+
+	get child() {
+		return this.child_;
+	}
+
+	set child(value) {
+		this.child_ = value; 
+	}
+
+	get height() {
+		return this.height_;
+	}
+
+	set height(value) {
+		this.height_ = value; 
+	}
+
+	// methods 
+
+	// tension 
+	tension() {
+
+		if (this.child != null) {
+
+			let d = this.pos.distance(this.child.pos);
+
+			// check the distance between this node and its child is greater than the allowed distance height
+			if (d >= this.height) {
+
+				// begin to calculate a spring force where k = 10 force units per pixel
+				let k = 10;
+				let tension = (-k * d); 
+
+				let x = d * Math.cos(Math.atan((this.child.pos.y - this.pos.y)/(this.child.pos.x - this.pos.x)));
+				let y = d * Math.sin(Math.atan((this.child.pos.y - this.pos.y)/(this.child.pos.x - this.pos.x)));
+
+				x = x * tension;
+				y = y * tension; 
+
+				return new Force(x, y);
+
+			}
+		
+		}
+
+		return new Force(0, 0);
+
+	}
+
+}
+
+
+// basically a linked list of seaweed nodes which are physics objects
+class SeaweedStalk {
+
+	// values
+	// 1. base (head)
+	// 2. initialMass
+	// 3. initialWidth
+	// 4. nodeHeight
+
+	// methods 
+	// 1. generate 
+	// Starting at the base, add children of decreasing width and mass 
+	// until a child of width 0 and mass 1 is reached. 
+
+	constructor(x, y, m=5, w=40, h=130) {
+
+		this.base = new SeaweedNode(null, x, y, m, w);
+		this.cursor = this.base;
+		this.initialMass = m;
+		this.initialWidth = w;
+		this.nodeHeight = h;
+		// this.isFixed = true; // this is not a physics class
+
+	}
+
+	// getters and setters
+	get base() {
+		return this.base_;
+	}
+
+	set base(value) {
+		this.base_ = value;
+	}
+
+	get cursor() {
+		return this.cursor_;
+	}
+
+	set cursor(value) {
+		this.cursor_ = value;
+	}
+
+	get initialMass() {
+		return this.initialMass_;
+	}
+
+	set initialMass(value) {
+		this.initialMass_ = value;
+	}
+
+	get initialWidth() {
+		return this.initialWidth_;
+	}
+
+	set initialWidth(value) {
+		this.initialWidth_ = value;
+	}
+
+	// methods 
+
+	// Generate 
+	generate() {
+
+		let m = this.initialMass - 1;
+		let w = this.initialWidth - 10;
+		// let cursor = this.base; 
+
+		// make nodes in a loop until m == 1
+		do {
+
+			// create the child at current size
+			this.cursor.child = new SeaweedNode(null, this.base.pos.x, this.base.pos.y, m, w); 
+			if (DEBUG) {
+				console.log("created seaweed node with m = " + m);
+			}
+
+			// select the next node to add child
+			this.cursor = this.cursor.child; 
+
+			// decrease size for next child 
+			m--; 
+			w -= 10; 
+
+		} while (m >= 1);
+
+		if (DEBUG) {
+			console.log("finished seaweed generation!");
+		}
+
+	}
+
+	// place cursor back at the base
+	first() {
+		this.cursor = this.base; 
+	}
 
 }
 
@@ -296,7 +452,8 @@ var DEBUG = true;
 var testObj = new PhysObject();
 var sineCounter = 0;
 var testForce1 = new Force();
-
+var testWeed;
+var buoyancy = new Force(0, -30);
 
 
 function setup() {
@@ -316,6 +473,12 @@ function setup() {
 	testObj.pos.y = height / 2;
 	angleMode(DEGREES);
 	
+
+	// seaweed related activities
+	// create a test seaweed 
+	testWeed = new SeaweedStalk(x=width/2, y=height);
+	console.log(testWeed.base);
+	testWeed.generate();
 
 }
 
@@ -344,6 +507,13 @@ function draw() {
 
 	// test physics objects 
 
+	// remove all forces from seaweed 
+	while (testWeed.cursor != null) {
+		testWeed.cursor.forces = []; 
+		testWeed.cursor = testWeed.cursor.child;
+	}
+	testWeed.first();
+
 	// use sin and cos to change the force over time
 	// make it move in a circle 
 	// testForce1.x = sin(sineCounter) * 3;
@@ -351,12 +521,28 @@ function draw() {
 	testForce1.x = mouseX - testObj.pos.x;
 	testForce1.y = mouseY - testObj.pos.y;
 
+	// apply buoyant force to seaweed nodes 
+	while (testWeed.cursor != null) {
+
+		testWeed.cursor.forces.push(buoyancy);
+		if (DEBUG) {
+			console.log(testWeed.cursor.tension());
+		}
+		testWeed.cursor.forces.push(testWeed.cursor.tension());
+
+		testWeed.cursor.update();
+
+		testWeed.cursor = testWeed.cursor.child;
+
+	}
+	testWeed.first();
 
 	// reapply force every frame 
 	testObj.forces = [testForce1];
 
 	// move 
-	testObj.update();
+	// testObj.update();
+
 
 	// update the sine input 
 	if (sineCounter >= 360) {
