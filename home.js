@@ -331,8 +331,8 @@ class SeaweedNode extends PhysObject {
 				let x = d * Math.cos(Math.atan((this.child.pos.y - this.pos.y)/(this.child.pos.x - this.pos.x)));
 				let y = d * Math.sin(Math.atan((this.child.pos.y - this.pos.y)/(this.child.pos.x - this.pos.x)));
 
-				x = x * tension;
-				y = y * tension; 
+				x = (x * tension) + this.child.pos.x;
+				y = (y * tension) + this.child.pos.y; 
 
 				return new Force(x, y);
 
@@ -528,7 +528,9 @@ function draw() {
 		if (DEBUG) {
 			console.log(testWeed.cursor.tension());
 		}
-		testWeed.cursor.forces.push(testWeed.cursor.tension());
+		if (testWeed.cursor.child != null) {
+			testWeed.cursor.child.forces.push(testWeed.cursor.tension());
+		}
 
 		testWeed.cursor.update();
 
@@ -541,7 +543,7 @@ function draw() {
 	testObj.forces = [testForce1];
 
 	// move 
-	// testObj.update();
+	testObj.update();
 
 
 	// update the sine input 
