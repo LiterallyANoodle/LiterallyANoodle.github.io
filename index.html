@@ -1,152 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<meta charset="urf-8">
+	<meta charset="utf-8">
 	<title>Epic Mode</title>
-	<script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
-	<script src="https://unpkg.com/p5.createloop@0.2.8/dist/p5.createloop.js"></script>
-	<!-- <script src="lib/p5.clickable-1.2/p5.clickable.js"></script> -->
-	<script src="home.js"></script>
-	<font>
-		<style type="text/css">
-			html, body {
-				font-size: 15px !important;
-				line-height: 1.625 !important;
-				color: #FFFFFF;
-				font-family: Georgia;
-				width: 100%;
-				height: 100%;
-			}
-
-			.center {
-				margin: 0;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				-ms-transform: translate(-50%, -50%);
-				transform: translate(-50%, -50%);
-			}
-
-			.frontButtonPress {
-				animation-duration: 0.25s;
-				animation-name: frontButtonPress;
-
-				padding: 10px 20px;
-				font-size: 15px;
-				text-align: center;
-				cursor: pointer;
-				color: indigo;
-				border: 3px solid #FFFFFF;
-				background-color: indigo;
-				border-radius: 10px;
-				transition-duration: 0.4s;
-			}
-
-			@keyframes frontButtonPress {
-				from {padding: 15px 25px;}
-				to {padding: 10px 20px;}
-			}
-
-			.frontButtonRelease {
-				animation-duration: 0.5s;
-				animation-name: frontButtonRelease;
-				animation-fill-mode: forwards;
-
-				padding: 105vw 205vh;
-				font-size: 15px;
-				text-align: center;
-				cursor: pointer;
-				color: indigo;
-				border: 3px solid #FFFFFF;
-				background-color: indigo;
-				border-radius: 10px;
-				transition-duration: 0.4s;
-			}
-
-			@keyframes frontButtonRelease {
-				0% {padding: 10px 20px;}
-				99% {padding: 105vw 205vh; visibility: visible;}
-				100% {padding: 105vw 205vh; visibility: hidden;}
-			}
-
-			.frontButton {
-				padding: 15px 25px;
-				font-size: 15px;
-				text-align: center;
-				cursor: pointer;
-				color: white;
-				border: 3px solid #FFFFFF;
-				background-color: black;
-				border-radius: 10px;
-				transition-duration: 0.4s;
-			}
-			.frontButton:hover {
-				transition-duration: 0.4s;
-				background-color: indigo;
-			}
-
-			.water {
-				animation-duration: 3s;
-				animation-name: water;
-
-				background-image: linear-gradient(aquamarine, indigo);
-				/*padding: 100vw 100vh;*/
-				/*margin: 100%;*/
-				position: absolute;
-			}
-
-			@keyframes water {
-				from {opacity: 0%;}
-				to {opacity: 100%;}
-			}
-			/*.frontButtonHeld {
-				padding: 15px 25px;
-				font-size: 15px;
-				text-align: center;
-				cursor: pointer;
-				color: indigo;
-				border: 3px solid #FFFFFF;
-				background-color: black;
-				border-radius: 10px;
-				transition-duration: 0.4s;
-			}
-			.frontButtonHeld:hover {
-				transition-duration: 0.4s;
-				background-color: indigo;
-			}*/
-			/*.frontButton:active {
-				color: indigo;
-			}*/
-			
-		</style>
-	</font>
+	<style type="text/css">
+		
+	</style>
 </head>
 <meta name="viewport" content="width=device-width, height=device-height">
-<style>
-	body { padding: 0; margin: 0; background-color: indigo; } 
-	html { max-height: 100vh; max-width: 100vw; 
-		overflow-y: hidden; overflow-x: hidden;}
-</style>
 <body>
 	
 	
 	
 	<main>
-		<!-- removing the front button until further notice because it's just too much for right now --> 
-		<!-- <div class="center">
-			<button id="frontButton" class="frontButton" onmousedown="frontOnPressHandler()" onmouseup="frontOnReleaseHandler()">Clicky clicky.</button>
-		</div> -->
 		
 
-		<div id="water" class="water">
+		<div>
 			<div>
 				<p>
 					This site is a work in progress! For now, enjoy the (functioning) physics. I'm still working on the forces for those ones that fly away sorry!
 				</p>
-			</div>
-			<div id="canvasdiv">
-				<!-- canvas goes in here -->
-				
 			</div>
 		</div>
 
