@@ -4,25 +4,134 @@
 	<meta charset="utf-8">
 	<title>Epic Mode</title>
 	<style type="text/css">
+
+		@font-face {
+			font-family: "Lemon";
+			src: url(Assets/fonts/Lemon-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "RubikBurned";
+			src: url(Assets/fonts/RubikBurned-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "PressStart2P";
+			src: url(Assets/fonts/PressStart2P-Regular.ttf) format("truetype");
+		}
+
+		@keyframes cycle-gradient {
+			0% {
+				background-position: 0%;
+			}
+			100% {
+				background-position: 200%;
+			}
+		}
+
+		html {
+			max-width: 100%;
+			line-height: 1.4;
+			font-size: 16px;
+			overflow-x: hidden;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding: 0 16px;
+			color: black;
+			max-width: 100%;
+			background: url(Assets/spirit-wolf-tile.jpg);
+			image-rendering: crisp-edges;
+		}
+
+		.container {
+			max-width: 500px;
+			justify-content: center;
+			margin: 0 auto;
+		}
+
+		header {
+			border: 1px solid black;
+			font-family: "RubikBurned";
+			text-align: center;
+			color: goldenrod;
+			background: url(Assets/flame.gif) no-repeat bottom, black;
+			background-size: 100% auto;
+			position: relative;
+		}
+
+		header::before {
+			content: "";
+			z-index: 1;
+			width: 64px;
+			height: 70px;
+			background: url(Assets/Greydragon.gif) center no-repeat;
+			left: -50px;
+			bottom: -30px;
+			position: absolute;
+			pointer-events: none;
+			filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		header::after {
+			content: "";
+			z-index: 1;
+			width: 64px;
+			height: 70px;
+			background: url(Assets/Reddragon.gif) center no-repeat;
+			right: -50px;
+			bottom: -30px;
+			position: absolute;
+			pointer-events: none;
+			filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		.dragonbar {
+			width: 500px;
+			height: 37px;
+			background: url(Assets/dragonbar.gif) center no-repeat;
+			margin-bottom: 5px;
+		}
+
+		.hello {
+			font-family: "Lemon";
+			text-align: center;
+			border: 2px solid;
+			border-color: lightskyblue purple purple lightskyblue;
+			background-color: aquamarine;
+		}
+
+		.hello p {
+			text-align: left;
+		}
+
+		.rainbow {
+			background: linear-gradient(to right, red, orange, yellow, lime, cyan, blue, magenta, red, orange, yellow, lime, cyan, blue, magenta, red);
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			background-position: 0%;
+			background-size: 200%;
+			animation: cycle-gradient 3s linear infinite;
+			font-size: 60px;
+		}
+
 		
 	</style>
 </head>
 <meta name="viewport" content="width=device-width, height=device-height">
-<body>
-	
-	
-	
-	<main>
-		
+<body>	
+	<div class="container">
+		<header>
+			<h1>Dragons are really cool</h1>
+		</header>
 
-		<div>
-			<div>
-				<p>
-					This site is a work in progress! For now, enjoy the (functioning) physics. I'm still working on the forces for those ones that fly away sorry!
-				</p>
-			</div>
+		<div class="dragonbar"></div>
+
+		<div class="hello">
+			<span class="rainbow">OMG hiiiiiiii</span>
+			<p>Thank you for checking out my site. I love you so much. You're so sexy for being here aha,,,,,,</p>
 		</div>
-
-
-	</main>
+	</div>
 </body>
