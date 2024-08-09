@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>Epic Mode</title>
+	<style type="text/css">
+
+		@font-face {
+			font-family: "Lemon";
+			src: url(Assets/fonts/Lemon-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "RubikBurned";
+			src: url(Assets/fonts/RubikBurned-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "PressStart2P";
+			src: url(Assets/fonts/PressStart2P-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "Consolas";
+			src: url(Assets/fonts/CONSOLA.TTF) format("truetype");
+		}
+
+		@keyframes cycle-gradient {
+			0% {
+				background-position: 0%;
+			}
+			100% {
+				background-position: 200%;
+			}
+		}
+
+		html {
+			max-width: 100%;
+			line-height: 1.4;
+			font-size: 16px;
+			overflow-x: hidden;
+			margin: 0;
+			padding: 0;
+            text-shadow: 2px 2px black;
+		}
+
+		body {
+			padding: 0 16px;
+			color: lightgray;
+			max-width: 100%;
+			background: radial-gradient(at top center, rgba(0,0,0,0) 40%, black 90%) fixed, url(Assets/spirit-wolf-tile.jpg);
+			image-rendering: crisp-edges;
+            filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		.container {
+			max-width: 1000px;
+			justify-content: center;
+			margin: 0 auto;
+		}
+
+		header {
+			border: 1px solid black;
+			font-family: "RubikBurned";
+			text-align: center;
+			color: goldenrod;
+			background: url(Assets/flame.gif) no-repeat bottom, black;
+			background-size: 100% auto;
+			position: relative;
+		}
+
+		header::before {
+			content: "";
+			z-index: 1;
+			width: 64px;
+			height: 70px;
+			background: url(Assets/Greydragon.gif) center no-repeat;
+			left: -50px;
+			bottom: -30px;
+			position: absolute;
+			pointer-events: none;
+			filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		header::after {
+			content: "";
+			z-index: 1;
+			width: 64px;
+			height: 70px;
+			background: url(Assets/Reddragon.gif) center no-repeat;
+			right: -50px;
+			bottom: -30px;
+			position: absolute;
+			pointer-events: none;
+			filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		.dragonbar {
+			width: 500px;
+			height: 37px;
+			background: url(Assets/dragonbar.gif) center no-repeat;
+			margin-bottom: 5px;
+		}
+
+		.content {
+			text-align: left;
+			border: 2px solid;
+			border-color: lightskyblue purple purple lightskyblue;
+			background: #212121;
+            padding: 10px;
+            margin: 10px;
+            font-size: 18px;
+            font-family: "Consolas", monospace;
+		}
+
+        .content p {
+            text-indent: 20px;
+        }
+		
+		.content img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 10px;
+		}
+
+		.center {
+			margin: auto;
+			align-content: center;
+			text-align: center;
+		}
+
+		.codeblock {
+			text-align: left;
+			margin-left: auto;
+			margin-right: auto;
+			border: 2px solid;
+			border-color: white;
+			padding: 10px;
+			background-color: black;
+		}
+
+		.codeblock code {
+			white-space: pre-line;
+		}
+		
+	</style>
+</head>
+<meta name="viewport" content="width=device-width, height=device-height">
+<body>	
+	<div class="container">
+		<header>
+			<h1>Mapping and Respect</h1>
+		</header>
+
+		<div class="content">
+			<p>
+				Notice: This is the first draft of a thought I was formulating and calls upon some popular people who you may love or hate and refers to them in ways you may not like. I may or may not update it later. Originally written August 1st, 2024. Posted here August 8th, 2024.
+			</p>
+            <p>
+				Why is it that I respect Jimmy McGee and CJ the X but not other youtubers like Studio Ersatz or that guy who made that one Ratatouille analysis that made a spin on formerly xitter dot com? 
+				All of them have brought me entertainment of good or greater quality for free.
+				It certainly could be the tone, but frankly, CJ and Jimmy both have completely different tones and forms of humor in their essays, and plenty of these creators that I don't respect have a similar monotone and authoritative mode of speaking like Jimmy. 
+				It could be the research done, but again, everyone I am talking about here usually has done some amount of research, it not a huge amount. 
+				I definitely *like* the things they've made, but I cannot bring myself to respect them beyond respecting their adequacy whereas Jimmy and CJ seem like people I would actively want to meet and discuss things with. 
+            </p>
+			<p>
+				To me it's possible that I respect them more than others because their synthesis comes from sources beyond just mapping two concepts that exist. 
+				Kiwic can write a 1 hour essay about the Evangelion, but I never find myself coming back to it to rewatch. It was interesting, for sure, but I can barely remember it beyond good presentation and deep research into psychology. 
+				But I think it's because these rely so heavily on research that I can't respect them as much. 
+			</p>
+			<p>
+				I actively dislike Wendigoon because he just compiles wikipedia articles and surface-level research into an easy-to-chew video and then recites it verbatim. 
+				This is a presentation of fact. You can't really complain about it because it's just information in compilation form. But it's hard to love. 
+				One step above this is what these other essayists are doing where they take idea A and idea B and create a link between them. It's mapping. It's more respectable because it requires understanding of both sources. 
+				An analysis of Evangelion with Jungian psychology is correct and even good.
+			</p>
+			<p>
+				But, like, it's not attached to them. It makes no difference if Kiwic made the connection or Ersatz. 
+				These are Carl Jung's ideas applied. It doesn't matter who speaks them, they are still his. 
+				If Carl Jung had seen Evangelion and given enough of a shit to write on it, he could have made the exact same connections. 
+			</p>
+			<p>
+				Mapping is good, but it's not impressive enough to hold my respect, then?
+				No, because Jimmy and CJ are definitely doing some mapping as well, so why is it different? 
+			</p>
+			<p>
+				The tentative conclusion I came to in the shower is that I respect them because they have incorporated their own experience into the work either explicitly or implicitly, therefore making the ideas fully transformed and their own. 
+				Anyone can recite Jung from deep reading and apply it to a story or other idea that it has never been applied to before, but it's still Jung's idea. 
+				The only new information being added here is that there is a link between Jung and idea A. 
+				But, like, that was already implied from Jung's ideas to begin with. Like no shit. He was talking about an idea that he implicitly intended to be applied to many situations. 
+				This goes for any original philosophical writing. 
+				The implicit intent of any philosophical writing is that you will read it and then go on to apply the principles therein to various experiences and situations. 
+			</p>
+			<p>
+				Meanwhile, CJ explicitly draws upon his own experience merely with other resources added for complement and salt. His own experience is where the meat of his words come from. These ideas could not be made by someone else. I could not substitute my own tongue + brain complex to make the connections he has because my tongue + brain complex has not absorbed the information that he has. 
+				I have absorbed Carl Jung's ideas into my own brain + tongue complex, so I could easily speak about it just as any other. 
+				Same with Jimmy. He is implicitly drawing upon his own experiences, even going so far as to do a full playthrough of multiple Diablo games to write on his experiences about them.
+			</p>
+			<p>
+				AND EVEN FURTHER -- THE FUCKING MADMAN -- these writings about the entire Diablo series are only stepping stones to enhance his preexisting writings about games as a whole (the Pay to Win series). 
+				Like, wow the guy literally wrote a 4 hour video essay on Diablo just to set up some preface for another point he was making. 
+				He is not satisfied with just looking at the games and reading other people's writings about them. He must experience them himself and make connections between the multitude of experiences he has had between them. 
+				I think the greatest example of this is his diatribe in episode 2 of Pay to Win called "Pickin shit up" where he talks about the task of collecting things in games. 
+				He doesn't cite any outside work other than the subject that gave him the experience and is able to talk about what it made him feel in great detail as well as coming to a conclusion about how it connects to his greater experience with games as a whole. 
+			</p>
+			<p>
+				These people, are at level with philosophers of old because they are not doing simple mapping of outside ideas that they have internalized and are regurgitating and mixing with the vomit of other dishes that have been prepared for them and eaten.
+				They made the fucking recipe. They tasted the ingredients and said "hey these might go well together if I cook them this way." 
+				I respect them because they are fully original. Rather than being original only by virtue that the progenitor of the original idea was not alive long enough to experience every possible mapping/application of their original idea, so someone had to pick up the technical debt of explaining the applications.
+			</p>
+        </div>
+	</div>
+</body>
