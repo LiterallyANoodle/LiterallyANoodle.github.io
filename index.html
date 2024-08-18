@@ -20,6 +20,11 @@
 			src: url(Assets/fonts/PressStart2P-Regular.ttf) format("truetype");
 		}
 
+		@font-face {
+			font-family: "Ciircuit";
+			src: url(Assets/fonts/Ciircuit-Regular.ttf) format("truetype");
+		}
+
 		@keyframes cycle-gradient {
 			0% {
 				background-position: 0%;
@@ -97,17 +102,32 @@
 			margin-bottom: 5px;
 		}
 
-		.hello, .me, .cranium {
-			font-family: "Lemon";
+		.hello, .me, .cranium, .others {
+			padding: 5px;
+			margin: 5px;
+			font-family: Ciircuit;
 			text-align: center;
 			border: 2px solid;
 			border-color: lightskyblue purple purple lightskyblue;
 			background: url(Assets/MOVINGSTARS.gif) fixed;
 		}
 
-		.hello p, .cranium p, .cranium a {
+		.cranium, .others {
+			color:crimson;
+		}
+
+		.hello p, .cranium a, .others a {
 			text-align: left;
 			margin: 10px;
+			font-family: Lemon;
+		}
+
+		.others p {
+			font-size: small;
+			padding: 5px;
+			padding-left: 15px;
+			padding-top: 0px;
+			color: chartreuse;
 		}
 
 		.rainbow {
@@ -180,7 +200,16 @@
 					<a href="password-managers.html">Password Rules</a>
 				</li>
 				<li>
-					<a href="simple-mapping.html">Mapping and Respect</a>
+					<a href="simple-mapping.html">Simple Mapping</a>
+				</li>
+			</ul>
+		</div>
+		<div class="others">
+			<h2>Study the contents of other craniums!</h2>
+			<ul class="thoughts">
+				<li>
+					<a href="https://www.ribbonfarm.com/2015/02/18/a-dent-in-the-universe/">A Dent in the Universe</a>
+					<p>Helped me to cleave apart thoughts from my above article "Simple Mapping" after posting it.</p>
 				</li>
 			</ul>
 		</div>
@@ -223,6 +252,6 @@
 				</li>
 			</ul>
 		</footer>
-		<p class="me">Last updated August 8th, 2024</p>
+		<p class="me">Last updated August 18th, 2024</p>
 	</div>
 </body>
