@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>Epic Mode</title>
+	<style type="text/css">
+
+		@font-face {
+			font-family: "Lemon";
+			src: url(Assets/fonts/Lemon-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "RubikBurned";
+			src: url(Assets/fonts/RubikBurned-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "PressStart2P";
+			src: url(Assets/fonts/PressStart2P-Regular.ttf) format("truetype");
+		}
+
+		@font-face {
+			font-family: "Consolas";
+			src: url(Assets/fonts/CONSOLA.TTF) format("truetype");
+		}
+
+		@keyframes cycle-gradient {
+			0% {
+				background-position: 0%;
+			}
+			100% {
+				background-position: 200%;
+			}
+		}
+
+		html {
+			max-width: 100%;
+			line-height: 1.4;
+			font-size: 16px;
+			overflow-x: hidden;
+			margin: 0;
+			padding: 0;
+            text-shadow: 2px 2px black;
+		}
+
+		body {
+			padding: 0 16px;
+			color: lightgray;
+			max-width: 100%;
+			background: radial-gradient(at top center, rgba(0,0,0,0) 40%, black 90%) fixed, url(Assets/wolf-background-fill.jpg);
+			image-rendering: crisp-edges;
+            filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		.container {
+			max-width: 1000px;
+			justify-content: center;
+			margin: 0 auto;
+		}
+
+		header {
+			border: 1px solid black;
+			font-family: "RubikBurned";
+			text-align: center;
+			color: rgb(236, 37, 153);
+			background: url(Assets/DOGFIGHT.gif) no-repeat bottom, black;
+			background-size: 100% auto;
+			position: relative;
+		}
+
+		header::before {
+			content: "";
+			z-index: 1;
+			width: 64px;
+			height: 70px;
+			background: url(Assets/Greydragon.gif) center no-repeat;
+			left: -50px;
+			bottom: -30px;
+			position: absolute;
+			pointer-events: none;
+			filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		header::after {
+			content: "";
+			z-index: 1;
+			width: 64px;
+			height: 70px;
+			background: url(Assets/Reddragon.gif) center no-repeat;
+			right: -50px;
+			bottom: -30px;
+			position: absolute;
+			pointer-events: none;
+			filter: drop-shadow(8px 8px 4px #000);
+		}
+
+		.dragonbar {
+			width: 500px;
+			height: 37px;
+			background: url(Assets/dragonbar.gif) center no-repeat;
+			margin-bottom: 5px;
+		}
+
+		.content {
+			text-align: left;
+			border: 2px solid;
+			border-color: lightskyblue purple purple lightskyblue;
+			background: #212121;
+            padding: 10px;
+            margin: 10px;
+            font-size: 18px;
+            font-family: "Consolas", monospace;
+		}
+
+        .content p {
+            text-indent: 20px;
+        }
+		
+		.content img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 10px;
+		}
+
+		.center {
+			margin: auto;
+			align-content: center;
+			text-align: center;
+		}
+
+		.codeblock {
+			text-align: left;
+			margin-left: auto;
+			margin-right: auto;
+			border: 2px solid;
+			border-color: white;
+			padding: 10px;
+			background-color: black;
+		}
+
+		.codeblock code {
+			white-space: pre-line;
+		}
+		
+	</style>
+</head>
+<meta name="viewport" content="width=device-width, height=device-height">
+<body>	
+	<div class="container">
+		<header>
+			<h1>Fail to Fail</h1>
+		</header>
+
+		<div class="content">
+			<p>
+				I believe the common American is typically one who aspires to many great things, but often fails to accomplish such lofty goals on account of numerous obstacles. 
+                I might also just be projecting. However, I have heard complaints both casual (mentioned in daily conversation) and hearty (said with the lungs in dramatic essay) that 
+                it's difficult to get into good hobbies/professions and sustain them continuously. Reading books regularly, making a game, painting a picture, learning to bake, going 
+                to the gym regularly, learning a language, etc. Any kind of medium-to-long term project or skill which demands recurring action from the participant where there is 
+                no whip of authority behind it to sustain the behavior except the will of the participant. 
+			</p>
+            <p>
+                Previous successes of my own are few and sporadic, but they do exist. One example was baking bread every week. This habit came to me fully formed and thoughtless 
+                one day, and I continued to do it for a year until I moved out of that apartment. Even through what was definitely depression, I would always bake bread on the weekend. 
+                It was simply the next thing to do that day. Nothing about my mood really affected it. There was not a conscious thought in my head at any point which thought "I 
+                should start baking bread every week." I simply started doing it. Going to the gym is also something that occurred to me fully formed and thoughtless. I just wrote up 
+                a routine one day and went to the gym. I had no particular goal in mind, I just went. This habit sustained itself continuously until my school schedule became so 
+                overloaded and sporadic that I had no contiguous time blocks to fit gym in (my routine was rather long, usually taking 3 hours). 
+            </p>
+            <p>
+                What I want to emphasize here is the thoughtlessness of these habits. I never once thought that I wanted to start these things. I simply started doing them. When habits 
+                like these happen to you (and the right phrase really is "happen to you"), it really is something magical. But it is the unfortunate truth that waiting for God's 
+                grace to instill the thoughtless motivation in you to do cool things is unreliable at best. Another method must be found.
+            </p>
+            <p>
+                Coming back to the obstacles to conscious habits, why does one activity stop you from doing another? The simplest and most direct answer is that tasks take time, and 
+                time spent on one task is time not spent on another. Therefore, an undesirable habit is one which does not fulfill you enough for the time spent on it. Scrolling 
+                social media, watching videos, and binging television shows are often cited as fitting in this class of undesirable habit. But what about these activities is 
+                more appealing than activities with greater fulfillment, such that you do them over and over again? It's not the physical energy spent. For example, many would 
+                prefer to read books, which costs about the same amount of physical energy, but still they cannot. The problem is psychic, as is probably obvious to anyone in the 
+                modern world. Unfortunately, I do not have an all-encompassing answer for why people are drawn into these things over other available things. 
+            </p>
+            <p>
+                What I DO have, though, is a little psychic trick to bring about the replacement of undesirable habits with desirable ones. As of yet, I've only been testing it 
+                for a couple months, but I think it's definitely an improvment. I simply fail to do the undesirable habits and get bored enough to do the desirable ones. 
+                If this seems confusing to you, consider for a moment all the times you tried to stop doing something you hated. My prediction is that you most likely thought of 
+                stopping the habit as some form of active prevention, like stopping water from streaming downhill. Perhaps another angle you may have taken is that you need to 
+                start the good habits in order to replace and stop the bad ones. In both cases, I would like to highlight the fallacy that ceasing the bad habits requires some kind 
+                of active participation on your part, or some kind of willpower to stop your hand. <b>The reality is the opposite.</b>
+            </p>
+            <p>
+                What is the default option for all things? (And don't say "the path of least resistance." That's a phrase for midwits to regurgitate.) The default action is no action 
+                at all. Your most natural state is doing nothing. We have this nasty habit of conflating screentime activities with "doing nothing." I suppose this might come from 
+                the common response of "Oh, nothing," when asked what we did last weekend, which is shorthand for "Oh, nothing interesting." But I'm betting you <b>did</b> do something. 
+                You played on your phone, or maybe you played a video game, or maybe you clicked on a video, etc. That's no "nothing" feat! You contracted the muscles in your arm, 
+                contorted yourself in such a way that these things came about. If you had really done <b>nothing</b> then you would have remained in bed all weekend, not even opening 
+                your eyes until Monday morning rolled around. (I'll even allow some leeway in saying that breathing is doing nothing, since you literally cannot stop doing that even 
+                if you tried.) 
+            </p>
+            <p>
+                And doesn't that sound ridiculous! Doing actually nothing sounds horrendous! You surely have to do <b>something</b> to prevent insanity! So is that what your phone is 
+                for - just preventing instanity? In practice, it seem that way. We know that isn't the only option available, however. There are all the good, desirable, and fulfilling 
+                activities that you perhaps have dreamed a long time of doing. Those, conveniently, are also something to do rather than nothing. The good habits will prevent insanity 
+                on top of doing all manner of great things for you. 
+            </p>
+            <p>
+                So the final step of the issue remains: how do you stop scrolling your phone in order to do these good habits? Well, that's the psychic trick. You engage the default 
+                option. When you think to click on that thing that will take up your time, fail to lift your arm. Fail to make it happen. After all, the phone cannot scroll itself 
+                for you. That is active participation on your part, and the easier option is not doing that. It will save you one arm-lift's worth of physical energy to not do it. 
+                Meanwhile, the physical cost of not doing it is exactly zero. You can do this with anything you don't like doing. Fail to do it. If you like it as a quippy mantra
+                that you can share with your friends<a href="#footnote-1">[1]</a>: Fail to fail. 
+            </p>
+            <p>
+                With this wonderfully easy saving of your physical energy, you will likely begin to get bored and possibly insane, given enough time. 
+                Luckily, we have already found our insanity prevention in the good habits. It is a human thing to be compelled to act, and so failing to do the bad habits leaves 
+                your mind fewer options to engage with, eventually leading you to engage with the good things. 
+            </p>
+        </div>
+        <div class="content">
+            <p id="footnote-1">[1] I do not endorse this kind of behavior. Do not quip philosophy to your friends. Discuss concepts with them properly.</p>
+        </div>
+        <div class="content">
+			<p>
+				Last Updated on January 3, 2025
+			</p>
+		</div>
+	</div>
+</body>
