@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+	<title>Epic Mode</title>
+
+    <link rel="preload" href="Assets/fonts/Ciircuit-Regular.ttf" as="font" />
+
+    <style type="text/css">
+
+        @font-face {
+			font-family: "Ciircuit";
+			src: url(Assets/fonts/Ciircuit-Regular.ttf) format("truetype");
+		}
+
+        body {
+            background-color: black;
+            font-family: Ciircuit;
+        }
+
+        canvas {
+            background-color: white;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .canv-container canvas {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            column-gap: 0px;
+            border: 2px solid;
+            border-color: purple;
+        }
+
+        .canv-container canvas:hover {
+            cursor: crosshair;
+        }
+
+        .button-container {
+            display: flex;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .button-container button {
+            all: unset;
+            padding: 5px;
+            width: 100%;
+            text-align: center;
+            color: rgb(129, 5, 53);
+            background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgb(45, 253, 97) 100%);
+            border: 2px solid;
+            border-color: purple;
+        }
+
+        .button-container button:hover {
+            cursor: pointer;
+            background: linear-gradient(0deg, rgb(121, 253, 45) 0%, rgba(34,193,195,1) 100%);
+            color: rgb(211, 22, 195);
+        }
+
+    </style>
+
+    <script>
+
+        var canvas, ctx, w, h = null;
+        var paintbrush = {
+            prevX: 0,
+            prevY: 0,
+            currX: 0,
+            currY: 0,
+            color: "#000000",
+            thickness: 1,
+            drawing: false,
+        }
+
+        function getBrushPosition(action, event) {
+            const canvBound = canvas.getBoundingClientRect();
+            if (action == 'down') {
+                paintbrush.prevX = paintbrush.currX;
+                paintbrush.prevY = paintbrush.currY;
+                paintbrush.currX = event.clientX - canvBound.left;
+                paintbrush.currY = event.clientY - canvBound.top;
+
+                paintbrush.drawing = true; 
+            }
+            if (action == 'up' || action == 'out') {
+                paintbrush.drawing = false; 
+            }
+            if (action == 'move') {
+                if (paintbrush.drawing) {
+                    paintbrush.prevX = paintbrush.currX;
+                    paintbrush.prevY = paintbrush.currY;
+                    paintbrush.currX = event.clientX - canvBound.left;
+                    paintbrush.currY = event.clientY - canvBound.top;
+                    draw();
+                }
+            }
+        }
+
+        function draw() {
+            ctx.beginPath();
+            ctx.moveTo(paintbrush.prevX, paintbrush.prevY);
+            ctx.lineTo(paintbrush.currX, paintbrush.currY); 
+            ctx.strokeStyle = paintbrush.color;
+            ctx.lineWidth = paintbrush.thickness;
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        function init() {
+            canvas = document.getElementById("canv");
+            ctx = canvas.getContext("2d");
+            w = canvas.width;
+            h = canvas.height; 
+
+            canvas.addEventListener("mousemove", (e) => {
+                getBrushPosition('move', e);
+            }, false);
+            canvas.addEventListener("mousedown", (e) => {
+                getBrushPosition('down', e);
+            }, false);
+            canvas.addEventListener("mouseup", (e) => {
+                getBrushPosition('up', e);
+            }, false);
+            canvas.addEventListener("mouseout", (e) => {
+                getBrushPosition('out', e);
+            }, false);
+        }
+
+    </script>
+
+</head>
+<body onload="init()">
+    <div class="center">
+        <div class="canv-container">
+            <canvas id="canv" width="500" height="500"></canvas>
+            <div class="button-container">
+                <button class="canv-button">Send me your gorgeous art, beautiful.....</button>
+            </div>
+        </div>
+    </div>
+</body>
