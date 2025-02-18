@@ -76,7 +76,7 @@
             currX: 0,
             currY: 0,
             color: "#000000",
-            thickness: 1,
+            thickness: 2,
             drawing: false,
         }
 
@@ -89,9 +89,29 @@
                 paintbrush.currY = event.clientY - canvBound.top;
 
                 paintbrush.drawing = true; 
+
+                // set stroke 
+                ctx.strokeStyle = paintbrush.color;
+                ctx.lineWidth = paintbrush.thickness;
+                ctx.lineJoin = "round";
+
+                // Single click draws a dot
+                ctx.beginPath();
+                ctx.ellipse(paintbrush.currX, paintbrush.currY, paintbrush.thickness / 2, paintbrush.thickness / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.beginPath();
             }
             if (action == 'up' || action == 'out') {
                 paintbrush.drawing = false; 
+                ctx.closePath();
+
+                // round off the end of the line 
+                ctx.beginPath();
+                ctx.ellipse(paintbrush.currX, paintbrush.currY, paintbrush.thickness / 2, paintbrush.thickness / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.closePath();
             }
             if (action == 'move') {
                 if (paintbrush.drawing) {
@@ -105,11 +125,8 @@
         }
 
         function draw() {
-            ctx.beginPath();
             ctx.moveTo(paintbrush.prevX, paintbrush.prevY);
             ctx.lineTo(paintbrush.currX, paintbrush.currY); 
-            ctx.strokeStyle = paintbrush.color;
-            ctx.lineWidth = paintbrush.thickness;
             ctx.stroke();
             ctx.closePath();
         }
