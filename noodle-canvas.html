@@ -43,20 +43,21 @@
 
         .button-container {
             display: flex;
-            display: flex;
             justify-content: center;
             align-items: stretch;
+            flex-direction: column;
         }
 
         .button-container button {
             all: unset;
             padding: 5px;
-            width: 100%;
+            margin: 1px;
             text-align: center;
             color: rgb(129, 5, 53);
             background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgb(45, 253, 97) 100%);
             border: 2px solid;
             border-color: purple;
+            user-select: none;
         }
 
         .button-container button:hover {
@@ -65,20 +66,55 @@
             color: rgb(211, 22, 195);
         }
 
+        .color-button {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            background-color: black;
+            padding: 5px;
+            margin: 1px;
+            border: 2px solid;
+            border-color: purple;
+            user-select: none;
+            text-align: center;
+        }
+
+        .color-button label {
+            flex-grow: 1;
+            background-color: black;
+            text-shadow:
+               -1px -1px 0 white,
+                1px -1px 0 white,
+               -1px 1px 0 white,
+                1px 1px 0 white;
+            color: black;
+            cursor: pointer;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .color-button input {
+            visibility: hidden;
+            position: absolute;
+            bottom: 0;
+        }
+
     </style>
 
-    <script>
+    <script type="text/javascript">
 
         var canvas, ctx, w, h = null;
+        var colorPicker;
         var paintbrush = {
             prevX: 0,
             prevY: 0,
             currX: 0,
             currY: 0,
             color: "#000000",
-            thickness: 2,
+            thickness: 1,
             drawing: false,
         }
+        var drawHistory = [];
 
         function getBrushPosition(action, event) {
             const canvBound = canvas.getBoundingClientRect();
@@ -93,6 +129,7 @@
                 // set stroke 
                 ctx.strokeStyle = paintbrush.color;
                 ctx.lineWidth = paintbrush.thickness;
+                ctx.lineCap = "round";
                 ctx.lineJoin = "round";
 
                 // Single click draws a dot
@@ -105,12 +142,6 @@
             }
             if (action == 'up' || action == 'out') {
                 paintbrush.drawing = false; 
-                ctx.closePath();
-
-                // round off the end of the line 
-                ctx.beginPath();
-                ctx.ellipse(paintbrush.currX, paintbrush.currY, paintbrush.thickness / 2, paintbrush.thickness / 2, 0, 0, Math.PI * 2);
-                ctx.fill();
                 ctx.closePath();
             }
             if (action == 'move') {
@@ -128,7 +159,31 @@
             ctx.moveTo(paintbrush.prevX, paintbrush.prevY);
             ctx.lineTo(paintbrush.currX, paintbrush.currY); 
             ctx.stroke();
-            ctx.closePath();
+        }
+
+        function clearCanvas() {
+            console.log("Entered clear function.");
+            var confirm = window.confirm("Are you sure you want to clear the canvas?");
+            if (confirm) {
+                ctx.clearRect(0, 0, w, h);
+                drawHistory = [];
+            }
+        }
+
+        function increaseThickness() {
+            paintbrush.thickness++;
+        }
+
+        function decreaseThickness() {
+            if (paintbrush.thickness > 1) {
+                paintbrush.thickness--;
+            }
+        }
+
+        function setBrushColor(event) {
+            paintbrush.color = event.target.value;
+            document.getElementById("color-picker-label").style.backgroundColor = event.target.value;
+            document.getElementById("color-picker-div").style.backgroundColor = event.target.value;
         }
 
         function init() {
@@ -149,6 +204,10 @@
             canvas.addEventListener("mouseout", (e) => {
                 getBrushPosition('out', e);
             }, false);
+
+            colorPicker = document.getElementById("color-picker");
+            colorPicker.value = paintbrush.color;
+            colorPicker.addEventListener("change", setBrushColor, false);
         }
 
     </script>
@@ -159,7 +218,14 @@
         <div class="canv-container">
             <canvas id="canv" width="500" height="500"></canvas>
             <div class="button-container">
-                <button class="canv-button">Send me your gorgeous art, beautiful.....</button>
+                <button class="send-button" type="button">Send me your gorgeous art, beautiful.....</button>
+                <button class="clear-button" type="button" onclick="clearCanvas()">Destroy it all</button>
+                <button class="inc-thick-button" type="button" onclick="increaseThickness()">bigger</button>
+                <button class="dec-thick-button" type="button" onclick="decreaseThickness()">smaller</button>
+                <div id="color-picker-div" class="color-button">
+                    <label id="color-picker-label" for="color-picker">Color</label>
+                    <input id="color-picker" type="color"/>
+                </div>
             </div>
         </div>
     </div>
