@@ -113,8 +113,11 @@
             color: "#000000",
             thickness: 1,
             drawing: false,
+            eraseMode: false,
         }
         var drawHistory = [];
+        var eraseJobs = [];
+        var undoDepth = 0;
 
         function getBrushPosition(action, event) {
             const canvBound = canvas.getBoundingClientRect();
@@ -132,17 +135,35 @@
                 ctx.lineCap = "round";
                 ctx.lineJoin = "round";
 
-                // Single click draws a dot
-                ctx.beginPath();
-                ctx.ellipse(paintbrush.currX, paintbrush.currY, paintbrush.thickness / 2, paintbrush.thickness / 2, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.closePath();
+                if (paintbrush.eraseMode) {
+                    // Single click erases a square
+                    ctx.beginPath();
+                    ctx.clearRect(
+                        paintbrush.currX - paintbrush.thickness / 2, 
+                        paintbrush.currY - paintbrush.thickness / 2,
+                        paintbrush.thickness,
+                        paintbrush.thickness
+                    )
+                } else {
+                    // Single click draws a dot
+                    ctx.beginPath();
+                    ctx.ellipse(paintbrush.currX, paintbrush.currY, paintbrush.thickness / 2, paintbrush.thickness / 2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.closePath();
+                }
 
                 ctx.beginPath();
             }
             if (action == 'up' || action == 'out') {
+                if (paintbrush.drawing) {
+                    ctx.closePath();
+                    if (paintbrush.eraseMode) {
+                        eraseProcess();
+                    }
+                    ctx.save();
+                    undoDepth++;
+                }
                 paintbrush.drawing = false; 
-                ctx.closePath();
             }
             if (action == 'move') {
                 if (paintbrush.drawing) {
@@ -150,7 +171,12 @@
                     paintbrush.prevY = paintbrush.currY;
                     paintbrush.currX = event.clientX - canvBound.left;
                     paintbrush.currY = event.clientY - canvBound.top;
-                    draw();
+                    if (paintbrush.eraseMode) {
+                        erase();
+                        eraseProcess();
+                    } else {
+                        draw();   
+                    }
                 }
             }
         }
@@ -161,13 +187,51 @@
             ctx.stroke();
         }
 
+        function erase() {
+            // no built-in method to erase in a line, so we loop
+            var lowX = (paintbrush.currX < paintbrush.prevX) ? paintbrush.currX : paintbrush.prevX;
+            var highX = (paintbrush.currX > paintbrush.prevX) ? paintbrush.currX : paintbrush.prevX;
+            var lowY = (paintbrush.currY < paintbrush.prevY) ? paintbrush.currY : paintbrush.prevY;
+            var highY = (paintbrush.currY > paintbrush.prevY) ? paintbrush.currY : paintbrush.prevY;
+            eraseJobs.push([lowX, highX, lowY, highY]);
+        }
+
+        async function eraseProcess() {
+            var currJob = null;
+            while (eraseJobs.length > 0) {
+                currJob = eraseJobs.pop();
+                for (var x = currJob[0]; x < currJob[1]; x++) {
+                    for (var y = currJob[2]; y < currJob[3]; y++) {
+                        ctx.clearRect(
+                            x - paintbrush.thickness / 2, 
+                            y - paintbrush.thickness / 2,
+                            paintbrush.thickness,
+                            paintbrush.thickness
+                        )
+                    }
+                }
+            }
+        }
+
+        function undoDraw() {
+            if (undoDepth > 0) {
+                ctx.clearCanvas()
+                ctx.restore();
+                undoDepth--;
+            }
+        }
+
         function clearCanvas() {
-            console.log("Entered clear function.");
             var confirm = window.confirm("Are you sure you want to clear the canvas?");
             if (confirm) {
                 ctx.clearRect(0, 0, w, h);
                 drawHistory = [];
             }
+        }
+
+        function toggleErase() {
+            paintbrush.eraseMode = !paintbrush.eraseMode;
+            document.getElementById("eraser").textContent = paintbrush.eraseMode ? "Eraser ON" : "Eraser OFF";
         }
 
         function increaseThickness() {
@@ -191,6 +255,9 @@
             ctx = canvas.getContext("2d");
             w = canvas.width;
             h = canvas.height; 
+
+            ctx.save();
+            undoDepth++;
 
             canvas.addEventListener("mousemove", (e) => {
                 getBrushPosition('move', e);
@@ -226,6 +293,8 @@
                     <label id="color-picker-label" for="color-picker">Color</label>
                     <input id="color-picker" type="color"/>
                 </div>
+                <button id="eraser" class="erase-toggle-button" type="button" onclick="toggleErase()">Eraser OFF</button>
+                <button class="erase-toggle-button" type="button" onclick="undoDraw()">UNDO</button>
             </div>
         </div>
     </div>
