@@ -111,13 +111,16 @@
             currX: 0,
             currY: 0,
             color: "#000000",
-            thickness: 1,
+            thickness: 2,
             drawing: false,
             eraseMode: false,
         }
         var drawHistory = [];
-        var eraseJobs = [];
+        var drawFuture = [];
+        var currentImg = null;
         var undoDepth = 0;
+        var redoDepth = 0;
+        var eraseJobs = [];
 
         function getBrushPosition(action, event) {
             const canvBound = canvas.getBoundingClientRect();
@@ -160,8 +163,12 @@
                     if (paintbrush.eraseMode) {
                         eraseProcess();
                     }
-                    ctx.save();
+                    // save state for undo
+                    drawHistory.push(currentImg);
                     undoDepth++;
+                    currentImg = ctx.getImageData(0, 0, w, h);
+                    drawFuture = [];
+                    redoDepth = 0;
                 }
                 paintbrush.drawing = false; 
             }
@@ -196,7 +203,7 @@
             eraseJobs.push([lowX, highX, lowY, highY]);
         }
 
-        async function eraseProcess() {
+        function eraseProcess() {
             var currJob = null;
             while (eraseJobs.length > 0) {
                 currJob = eraseJobs.pop();
@@ -215,9 +222,23 @@
 
         function undoDraw() {
             if (undoDepth > 0) {
-                ctx.clearCanvas()
-                ctx.restore();
+                ctx.clearRect(0, 0, w, h);
+                drawFuture.push(currentImg);
+                currentImg = drawHistory.pop();
+                ctx.putImageData(currentImg, 0, 0);
                 undoDepth--;
+                redoDepth++;
+            }
+        }
+
+        function redoDraw() {
+            if (redoDepth > 0) {
+                ctx.clearRect(0, 0, w, h);
+                drawHistory.push(currentImg);
+                currentImg = drawFuture.pop();
+                ctx.putImageData(currentImg, 0, 0);
+                undoDepth++;
+                redoDepth--;
             }
         }
 
@@ -256,8 +277,8 @@
             w = canvas.width;
             h = canvas.height; 
 
-            ctx.save();
-            undoDepth++;
+            // save initial state for undo/redo
+            currentImg = ctx.getImageData(0, 0, w, h);
 
             canvas.addEventListener("mousemove", (e) => {
                 getBrushPosition('move', e);
@@ -294,7 +315,8 @@
                     <input id="color-picker" type="color"/>
                 </div>
                 <button id="eraser" class="erase-toggle-button" type="button" onclick="toggleErase()">Eraser OFF</button>
-                <button class="erase-toggle-button" type="button" onclick="undoDraw()">UNDO</button>
+                <button class="undo-button" type="button" onclick="undoDraw()">UNDO</button>
+                <button class="redo-button" type="button" onclick="redoDraw()">REDO</button>
             </div>
         </div>
     </div>
