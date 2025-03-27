@@ -298,6 +298,17 @@
             colorPicker.addEventListener("change", setBrushColor, false);
         }
 
+        async function sendImage() {
+            const response = await fetch("http://localhost:6969", {
+                method: "POST",
+                body: document.getElementById("canv").toDataURL(),
+                headers: {
+                    "Content-type": "text/html; charset=UTF-8"
+                }
+            });
+            console.log("idk lol");
+        }
+
     </script>
 
 </head>
@@ -306,10 +317,10 @@
         <div class="canv-container">
             <canvas id="canv" width="500" height="500"></canvas>
             <div class="button-container">
-                <button class="send-button" type="button">Send me your gorgeous art, beautiful.....</button>
+                <button class="send-button" type="button" onclick="sendImage()">Send me your gorgeous art, beautiful.....</button>
                 <button class="clear-button" type="button" onclick="clearCanvas()">Destroy it all</button>
-                <button class="inc-thick-button" type="button" onclick="increaseThickness()">bigger</button>
-                <button class="dec-thick-button" type="button" onclick="decreaseThickness()">smaller</button>
+                <button class="inc-thick-button" type="button" onclick="increaseThickness()">bigger brush</button>
+                <button class="dec-thick-button" type="button" onclick="decreaseThickness()">smaller brush</button>
                 <div id="color-picker-div" class="color-button">
                     <label id="color-picker-label" for="color-picker">Color</label>
                     <input id="color-picker" type="color"/>
