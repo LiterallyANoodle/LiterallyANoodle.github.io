@@ -305,8 +305,14 @@
                 headers: {
                     "Content-type": "text/html; charset=UTF-8"
                 }
+            })
+            .then((response) => {
+                const time = Date.now();
+                response.text().then((text) => {
+                    console.log(`${new Date(time).toISOString()} Server Response: ${response.status} --- ${text}`);
+                    window.alert(`Message from server:\n${text}`)
+                });
             });
-            console.log("idk lol");
         }
 
     </script>
