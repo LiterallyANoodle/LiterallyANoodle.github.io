@@ -189,6 +189,7 @@
         }
 
         function draw() {
+	    ctx.strokeStyle = paintbrush.color;
             ctx.moveTo(paintbrush.prevX, paintbrush.prevY);
             ctx.lineTo(paintbrush.currX, paintbrush.currY); 
             ctx.stroke();
