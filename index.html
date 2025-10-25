@@ -10,6 +10,7 @@
 	<link rel="preload" href="Assets/dragonbar.gif" as="image" />
 	<link rel="preload" href="Assets/Greydragon.gif" as="image" />
 	<link rel="preload" href="Assets/Reddragon.gif" as="image" />
+	<link rel="preload" href="Assets/newbulb.gif" as="image" />
 
 	<link rel="preload" href="Assets/fonts/Ciircuit-Regular.ttf" as="font" />
 	<link rel="preload" href="Assets/fonts/Lemon-Regular.ttf" as="font" />
@@ -68,6 +69,13 @@
 			max-width: 500px;
 			justify-content: center;
 			margin: 0 auto;
+			height: auto;
+		}
+
+		img.left {
+			float: left;
+			height: auto;
+			margin: 8px;
 		}
 
 		header {
@@ -113,7 +121,7 @@
 			margin-bottom: 5px;
 		}
 
-		.hello, .me, .cranium, .others {
+		.new, .hello, .me, .cranium, .others {
 			padding: 5px;
 			margin: 5px;
 			font-family: Ciircuit;
@@ -122,13 +130,20 @@
 			border-color: lightskyblue purple purple lightskyblue;
 			background: url(Assets/MOVINGSTARS.gif) fixed;
 			box-sizing: border;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.me video {
+			max-width: 100%;
+			height: 100%;
 		}
 
 		.cranium, .others {
 			color:crimson;
 		}
 
-		.hello p, .cranium a, .others a {
+		.new p, .hello p, .cranium a, .others a {
 			text-align: left;
 			margin: 10px;
 			font-family: Lemon;
@@ -149,6 +164,12 @@
 			background-position: 0%;
 			background-size: 200%;
 			animation: cycle-gradient 3s linear infinite;
+			font-size: 60px;
+			text-shadow: none;
+		}
+
+		.scrolling {
+			direction: right;
 			font-size: 60px;
 			text-shadow: none;
 		}
@@ -194,6 +215,16 @@
 		</header>
 
 		<div class="dragonbar"></div>
+
+		<div class="new">
+			<marquee class="scrolling">NEW FEATURE!!!!</marquee>
+			<div>
+				<img class="left" src="Assets/newbulb.gif">
+				<p>
+					<a href="https://canvas.noodledragon.fans">DRAW PICTURES FOR ME!!!! CLICK HERE IMMEDIATELY!!!!</a>
+				</p>
+			</div>
+		</div>
 
 		<div class="hello">
 			<span class="rainbow">OMG hiiiiiiii</span>
@@ -286,6 +317,6 @@
 				</li>
 			</ul>
 		</footer>
-		<p class="me">Last updated April 7, 2025</p>
+		<p class="me">Last updated October 25, 2025</p>
 	</div>
 </body>
