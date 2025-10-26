@@ -137,12 +137,29 @@
         var eraseJobs = [];
 
         function getBrushPosition(action, event) {
+            
+            // mobile compatibility 
+            if (event.target == document.getElementById("canv")) {
+                event.preventDefault();
+            }
+
+            let mX
+            let mY
+            if (event.touches != null) {
+                mX = event.touches[0].clientX
+                mY = event.touches[0].clientY
+            } else {
+                mX = event.clientX
+                mY = event.clientY
+            }
+
+
             const canvBound = canvas.getBoundingClientRect();
             if (action == 'down') {
                 paintbrush.prevX = paintbrush.currX;
                 paintbrush.prevY = paintbrush.currY;
-                paintbrush.currX = event.clientX - canvBound.left;
-                paintbrush.currY = event.clientY - canvBound.top;
+                paintbrush.currX = mX - canvBound.left;
+                paintbrush.currY = mY - canvBound.top;
 
                 paintbrush.drawing = true; 
 
@@ -190,8 +207,8 @@
                 if (paintbrush.drawing) {
                     paintbrush.prevX = paintbrush.currX;
                     paintbrush.prevY = paintbrush.currY;
-                    paintbrush.currX = event.clientX - canvBound.left;
-                    paintbrush.currY = event.clientY - canvBound.top;
+                    paintbrush.currX = mX - canvBound.left;
+                    paintbrush.currY = mY - canvBound.top;
                     if (paintbrush.eraseMode) {
                         erase();
                         eraseProcess();
@@ -295,6 +312,7 @@
             // save initial state for undo/redo
             currentImg = ctx.getImageData(0, 0, w, h);
 
+            // desktop mouse 
             canvas.addEventListener("mousemove", (e) => {
                 getBrushPosition('move', e);
             }, false);
@@ -306,6 +324,17 @@
             }, false);
             canvas.addEventListener("mouseout", (e) => {
                 getBrushPosition('out', e);
+            }, false);
+
+            // mobile compatibility
+            canvas.addEventListener("touchmove", (e) => {
+                getBrushPosition('move', e);
+            }, false);
+            canvas.addEventListener("touchstart", (e) => {
+                getBrushPosition('down', e);
+            }, false);
+            canvas.addEventListener("touchend", (e) => {
+                getBrushPosition('up', e);
             }, false);
 
             colorPicker = document.getElementById("color-picker");
