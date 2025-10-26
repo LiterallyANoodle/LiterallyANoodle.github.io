@@ -329,13 +329,13 @@
             // mobile compatibility
             canvas.addEventListener("touchmove", (e) => {
                 getBrushPosition('move', e);
-            }, false);
+	    }, { passive: false });
             canvas.addEventListener("touchstart", (e) => {
                 getBrushPosition('down', e);
-            }, false);
+	    }, { passive: false });
             canvas.addEventListener("touchend", (e) => {
                 getBrushPosition('up', e);
-            }, false);
+	    }, { passive: false });
 
             colorPicker = document.getElementById("color-picker");
             colorPicker.value = paintbrush.color;
