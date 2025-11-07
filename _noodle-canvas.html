@@ -148,7 +148,7 @@
 
             let mX
             let mY
-            if (event.touches != null) {
+		if (event.touches != null && event.touches.length > 0) {
                 mX = event.touches[0].clientX
                 mY = event.touches[0].clientY
             } else {
