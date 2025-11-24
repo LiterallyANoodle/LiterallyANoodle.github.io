@@ -17,10 +17,13 @@
         body {
             background: url(Assets/wolf-on-black-background.jpg) fixed;
             font-family: Ciircuit;
+	    overscroll-behavior: none;
         }
 
         canvas {
             background-color: white;
+	    touch-action: none;
+	    overscroll-behavior: none;
         }
 
         .center {
@@ -145,7 +148,7 @@
 
             let mX
             let mY
-            if (event.touches != null) {
+		if (event.touches != null && event.touches.length > 0) {
                 mX = event.touches[0].clientX
                 mY = event.touches[0].clientY
             } else {
@@ -329,13 +332,13 @@
             // mobile compatibility
             canvas.addEventListener("touchmove", (e) => {
                 getBrushPosition('move', e);
-	    }, { passive: false });
+	    }, { passive: false, capture: true });
             canvas.addEventListener("touchstart", (e) => {
                 getBrushPosition('down', e);
-	    }, { passive: false });
+	    }, { passive: false, capture: true });
             canvas.addEventListener("touchend", (e) => {
                 getBrushPosition('up', e);
-	    }, { passive: false });
+	    }, { passive: false, capture: true });
 
             colorPicker = document.getElementById("color-picker");
             colorPicker.value = paintbrush.color;
@@ -389,7 +392,9 @@
 	        <li>It's fun.</li>
 	        <li>Strawpage deletes the images once you view them unless you pay for their premium version, and I think that's lame.</li>
 	    </ol>
-	    <p>Also mine's cooler because it has a redo button, and it sends things on discord webhooks.</p>
+	    <p>Also mine's cooler because it has a redo button, and it sends things on discord webhooks. Mine also works* on mobile.</p>
+	    <h2>It doesn't work on Safari 26.</h2>
+	    <p>The safari devs are evil and hate me and you both. Use a different mobile browser.</p>
 	    <h2>I got a message back saying it failed to save the image. Did something go wrong?</h2>
 	    <p>No, I just don't have saving to disk enabled right now. As long as it says it got sent to discord, I will have your image.</p> 
 	    <h2>So this is on your server? Are you stealing my ip? You hacker. You evil fucking hacker I'm gonna tell on you.</h2>
