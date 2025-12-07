@@ -94,6 +94,7 @@
             border-color: purple;
             user-select: none;
             text-align: center;
+	    position: relative;
         }
 
         .color-button label {
@@ -111,9 +112,17 @@
         }
 
         .color-button input {
-            visibility: hidden;
             position: absolute;
-            bottom: 0;
+            top: 0;
+	    left: 0; 
+	    width: 100%;
+	    height: 100%;
+	    opacity: 0;
+	    padding: 0;
+	    margin: 0;
+	    border: none;
+	    cursor: pointer;
+	    z-index: 10;
         }
 
     </style>
@@ -351,7 +360,7 @@
         }
 
         async function sendImage() {
-            const response = await fetch("https://localhost:6969", {
+            const response = await fetch("https://localhost:6969/submit", {
                 method: "POST",
                 body: document.getElementById("canv").toDataURL(),
                 headers: {
@@ -406,6 +415,9 @@
 	    <p>No, this is proxied through cloudflare so I can't see your ip (and you can't see mine). Also if you're worried about anything else, you can press F12 to view the page source and the server source code can be viewed over <a href="https://github.com/LiterallyANoodle/canvas-toy-server">here</a>.</p>
 	    <h2>Can I use this?</h2>
 	    <p>Sure, you can copy it for yourself, but do not ask for help in deploying it. ( You're a big boy, you can figure it out :] )</p>
+	</div>
+	<div class="info-container">
+	    <h2>Last Updated December 6, 2025</h2>
 	</div>
     </div>
 </body>
