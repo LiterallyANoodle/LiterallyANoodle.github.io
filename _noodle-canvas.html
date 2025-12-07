@@ -140,15 +140,11 @@
         var eraseJobs = [];
 
         function getBrushPosition(action, event) {
-            
-            // mobile compatibility 
-            if (event.target == document.getElementById("canv")) {
-                event.preventDefault();
-            }
 
             let mX
             let mY
-		if (event.touches != null && event.touches.length > 0) {
+
+		    if (event.touches != null && event.touches.length > 0) {
                 mX = event.touches[0].clientX
                 mY = event.touches[0].clientY
             } else {
@@ -332,15 +328,22 @@
             // mobile compatibility
             canvas.addEventListener("touchmove", (e) => {
                 getBrushPosition('move', e);
-	    }, { passive: false, capture: true });
+	        }, { passive: false, capture: true });
             canvas.addEventListener("touchstart", (e) => {
+
+                // mobile compatibility 
+                if (event.target == document.getElementById("canv")) {
+                    event.preventDefault();
+                }
+
                 getBrushPosition('down', e);
-	    }, { passive: false, capture: true });
+	        }, { passive: false, capture: true });
             canvas.addEventListener("touchend", (e) => {
                 getBrushPosition('up', e);
-	    }, { passive: false, capture: true });
+	        }, { passive: false, capture: true });
 
             colorPicker = document.getElementById("color-picker");
+            document.getElementById("color-picker-div").addEventListener("touchstart", colorPicker.click(), false); // mobile
             colorPicker.value = paintbrush.color;
             colorPicker.addEventListener("change", setBrushColor, false);
         }
