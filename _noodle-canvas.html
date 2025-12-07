@@ -343,7 +343,9 @@
 	        }, { passive: false, capture: true });
 
             colorPicker = document.getElementById("color-picker");
-            document.getElementById("color-picker-div").addEventListener("touchstart", colorPicker.click(), false); // mobile
+            document.getElementById("color-picker-div").addEventListener("touchstart", () => {
+                colorPicker.click()
+            }, false); // mobile
             colorPicker.value = paintbrush.color;
             colorPicker.addEventListener("change", setBrushColor, false);
         }
